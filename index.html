@@ -285,7 +285,11 @@
   var lbl = document.getElementById("c-lbl"), dayEl = document.getElementById("c-day"),
       bar = document.getElementById("c-bar"), hrs = document.getElementById("c-hours"), left = document.getElementById("c-left");
   var target = 0, prefix = "DAY ", suffix = " / " + LENGTH;
-  if (day < 1) { lbl.textContent = "The arc starts in"; target = 1 - day; prefix = ""; suffix = " DAYS"; left.firstChild.nodeValue = LENGTH; }
+  if (day < 1) {
+    var until = 1 - day;
+    lbl.textContent = until === 1 ? "The arc starts tomorrow" : "The arc starts in " + until + " days";
+    target = 0; left.firstChild.nodeValue = LENGTH;
+  }
   else {
     target = Math.min(day, LENGTH);
     lbl.textContent = day > LENGTH ? "The arc, finished" : "The arc";
